@@ -1,18 +1,22 @@
 package com.persistencia.persistencia_cliente.config;
 
 import com.persistencia.persistencia_cliente.kafka.ConsumerService;
+import com.persistencia.persistencia_cliente.respository.ClienteRepository;
+import com.persistencia.persistencia_cliente.rest.ServiceRepository;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 public class SpringConfig {
 
-    public static final String BOOTSTRAP_SERVERS = "localhost:9092";
-    public static final String SCHEMA_REGISTRY = "http://localhost:8081";
+    public static final String BOOTSTRAP_SERVERS = "35.171.129.201:9092";
+    public static final String SCHEMA_REGISTRY = "http://35.171.129.201:8081";
 
     @Bean
     public KafkaConsumer consumer(){
@@ -33,8 +37,18 @@ public class SpringConfig {
 
 
     @Bean
-    public ConsumerService consumerService(final KafkaConsumer newConsumer){
+    public ConsumerService consumerService(final KafkaConsumer newConsumer) {
         return new ConsumerService(newConsumer);
+    }
+
+    @Bean
+    public ServiceRepository kafkaRepository(final ConsumerService consumerService, final Map transactionsMap) {
+        return new ClienteRepository(consumerService, transactionsMap);
+    }
+
+    @Bean
+    public Map transactionsMap() {
+        return new ConcurrentHashMap();
     }
 
 }
