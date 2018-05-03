@@ -19,11 +19,11 @@ public class Cliente {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String category;
+    private String email;
 
     private Cliente(final Cliente.Builder builder) {
         this.name = builder.name;
-        this.category = builder.category;
+        this.email = builder.email;
 
 
     }
@@ -33,9 +33,9 @@ public class Cliente {
         return name;
     }
 
-    @JsonGetter("category")
-    public String getCategory() {
-        return category;
+    @JsonGetter("email")
+    public String getEmail() {
+        return email;
     }
 
 
@@ -43,15 +43,15 @@ public class Cliente {
     public static class Builder {
 
         private String name;
-        private String category;
+        private String email;
 
         public Builder name(final String newAmount) {
             this.name = newAmount;
             return this;
         }
 
-        public Builder category(final String newCategory) {
-            this.category = newCategory;
+        public Builder email(final String newemail) {
+            this.email = newemail;
             return this;
         }
 

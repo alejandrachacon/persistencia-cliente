@@ -7,7 +7,7 @@
       "type": "string"
     },
     {
-      "name": "category",
+      "name": "email",
       "type": "string"
     }
   ]

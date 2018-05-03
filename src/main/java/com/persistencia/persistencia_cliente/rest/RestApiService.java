@@ -1,10 +1,11 @@
 package com.persistencia.persistencia_cliente.rest;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.persistencia.persistencia_cliente.model.Cliente;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class RestApiService {
@@ -15,14 +16,8 @@ public class RestApiService {
         this.repository = newRepository;
     }
 
-    @GetMapping(path = "getClients")
-    public String getTransactions() {
-        try {
-            return new ObjectMapper()
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(this.repository.getTransactions());
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error generating json map " + e.getMessage());
-        }
+    @GetMapping(path = "/getClients")
+    public List<Cliente> getClients() {
+       return repository.findAll();
     }
 }
