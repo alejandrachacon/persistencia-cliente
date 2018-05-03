@@ -29,7 +29,7 @@ public class Cliente {
     }
 
     @JsonGetter("name")
-    public String getAmount() {
+    public String getName() {
         return name;
     }
 
@@ -50,8 +50,8 @@ public class Cliente {
             return this;
         }
 
-        public Builder email(final String newemail) {
-            this.email = newemail;
+        public Builder email(final String newCategory) {
+            this.email = newCategory;
             return this;
         }
 

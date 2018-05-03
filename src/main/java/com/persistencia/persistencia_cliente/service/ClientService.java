@@ -2,6 +2,7 @@ package com.persistencia.persistencia_cliente.service;
 
 import com.persistencia.persistencia_cliente.kafka.ConsumerService;
 import com.persistencia.persistencia_cliente.model.Cliente;
+import com.persistencia.persistencia_cliente.model.ClienteDTO;
 import com.persistencia.persistencia_cliente.rest.ServiceRepository;
 import org.apache.avro.generic.GenericRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ClientService {
     @SuppressWarnings("unchecked")
     private void updateCache() {
 //        Map<String, Cliente> transactionMap = mapGenericRecordMap(this.consumerService.getKafkaRecords(1000, "gestionClientes"));
-        mapGenericRecordMap(this.consumerService.getKafkaRecords(1000, "gestionClientes"));
+        mapGenericRecordMap(this.consumerService.getKafkaRecords(1000, "gestionClient"));
 //        this.transactionsMap.putAll(transactionMap);
 
     }
@@ -48,7 +49,12 @@ public class ClientService {
     private void mapGenericRecordMap(Map<String, GenericRecord> transactions) {
 //        HashMap<String, Cliente> resultMap = new HashMap<>();
         transactions.forEach((key, value) -> {
-                serviceRepository.save(mapGenericRecord(value));
+            System.out.println("SAVING....");
+            ClienteDTO cliente = new ClienteDTO();
+            Cliente c = mapGenericRecord(value);
+            cliente.setEmail(c.getEmail());
+            cliente.setName(c.getName());
+                serviceRepository.save(cliente);
 //            resultMap.put(key, mapGenericRecord(value));
 
         });
