@@ -34,7 +34,7 @@ public class ClientService {
     public void init() {
         System.out.println("executing init()....");
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(this::updateCache, 0L, 15L, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(this::updateCache, 0L, 60L, TimeUnit.SECONDS);
     }
 
     @SuppressWarnings("unchecked")

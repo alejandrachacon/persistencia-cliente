@@ -1,6 +1,5 @@
 package com.persistencia.persistencia_cliente.rest;
 
-import com.persistencia.persistencia_cliente.model.Cliente;
 import com.persistencia.persistencia_cliente.model.ClienteDTO;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
